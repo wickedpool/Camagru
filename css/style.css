@@ -85,3 +85,13 @@ ul.footer li {
 		float: none;
 	}
 }
+
+/* Menu */
+
+ul.menu li { 
+	display : inline;
+	padding : 0 0.5em;
+}
+ul.menu {
+	list-style-type : none;
+}

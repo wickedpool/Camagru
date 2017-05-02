@@ -25,6 +25,11 @@ else {
 	<body>
 		<div class="wrapper">
 			<h1>CAMAGRU</h1>
+			<ul class="menu">
+				<li><a href="index.php">Home</a></li>
+				<li><a href="picture.php">MyPics</li>
+				<li><a href="gallery.php">Gallery</a></li>
+			</ul>
 		</div>
 		<ul class="footer">		
 			<li>F O O T E R</li>
