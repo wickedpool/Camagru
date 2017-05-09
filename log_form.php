@@ -1,5 +1,8 @@
 <?php
-echo '<link rel="stylesheet" type="text/css" href="style.css">';
+
+include_once 'header.php';
+
+echo '<link rel="stylesheet" type="text/css" href="css/style.css">';
 echo "<html class='home'>
 	<form class='logform' action=\"connexion.php\" method=\"post\">
 		<label class='mytext' for=\"login\">Login</label><br>

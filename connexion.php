@@ -6,7 +6,7 @@ if ($_POST['login'] && $_POST['login'] !== "" && $_POST['passwd'] !== "") {
 	$passwd = $_POST['passwd'];
 	session_start();
 	//CONNEXION SQL
-	$db = mysqli_connect("localhost", "root", "thgiraud", "camagru");
+	$db = mysqli_connect("localhost", "root", "root", "camagru");
 	if (!$db)
 		echo "fuck";
 	$login = preg_replace("[^A-Za-z0-9]","",$login);
