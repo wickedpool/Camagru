@@ -275,8 +275,8 @@ img#mygallery:hover {
 }
 
 .videobox {
-	background: #fff;
-	border: 30px solid #fff;
+	background: #DEB887;
+	border: 10px dashed wheat;
 	width: 640px;
 	display: block;
 	margin-left: auto;
@@ -296,7 +296,7 @@ img#mygallery:hover {
 }
 
 .button {
-	background-color: rgb(255, 138, 1);
+	background-color: wheat;
 	color: #fff;
 	padding: 14px 20px;
 	margin: 8px 0;
@@ -306,7 +306,7 @@ img#mygallery:hover {
 }
 
 .button:hover {
-	color: #000;
+	color: #DEB887;
 	background-color: rgb(227, 125, 5);
 }
 

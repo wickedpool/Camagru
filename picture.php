@@ -35,10 +35,6 @@ include_once 'header.php';
 	  <input type="radio" name="img_filter" value="images/filters/panama.png" id="panama" onchange="myimage('panama')">
 	  <img class="img" src="images/filters/panama.png" height="128" width="128">
 	</label>
-	<label for="sombrero">
-	  <input type="radio" name="img_filter" value="images/filters/sombrero.png" id="sombrero" onchange="myimage('sombrero')">
-	  <img class="img" src="images/filters/sombrero.png" height="128" width="128">
-	</label>
       </form>
       <br/>
       <button class="button" id="snap" onclick="javascript:Shot()">Prendre une photo</button>
