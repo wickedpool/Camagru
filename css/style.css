@@ -197,13 +197,13 @@ img#mygallery:hover {
 	box-shadow: 10px 10px 5px black
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1500px){
 	.wrapper img#myhome {
 		width: 100%;
 	}
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1500px){
 	.wrapper img#mygallery {
 		width: 21%;
 		position: relative;
@@ -214,7 +214,7 @@ img#mygallery:hover {
 	}
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1500px){
 	.wrapper img#mypics {
 		width: 21%;
 		position: relative;

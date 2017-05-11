@@ -29,7 +29,7 @@ function successCallback(localMediaStream) {
 
 function errorCallback(err) {
     video_statut = false;
-    console.log("The following error occured: " + err);
+    console.log("error : " + err);
 };
 
 function Shot() {
