@@ -19,6 +19,60 @@ h4 {
 	text-align: center;
 }
 
+/* FORM */
+
+form.logform {
+	background: #DEB887;
+	border: 10px dashed wheat;
+	width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2%;
+}
+
+input.mybar {
+	width: 60%;
+	height: 3%;
+	margin: 2%;
+}
+
+label.mytext {
+	font-size: 1.5em;
+}
+
+input.mybutton {
+	background-color: wheat;
+	color: #fff;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+input.mybutton:hover {
+	color: black;
+	background-color: #DEB887;
+}
+
+center {
+	margin: 1%;
+}
+
+a.mylink {
+	position: absolute;
+	bottom: 10%;
+	border: 10px solid #333;
+	background: #333;
+	color: white;
+}
+
+a.mylink:hover {
+	background-color: black;
+	border: 10px solid black;
+}
+
 /*  NAV  */
 
 ul.topnav {
@@ -87,7 +141,6 @@ ul.footer {
 	padding: 10px;
 	overflow: hidden;
 	background-color: #333;
-	margin-top: 13%;
 	display: flex;
 }
 
@@ -306,8 +359,8 @@ img#mygallery:hover {
 }
 
 .button:hover {
-	color: #DEB887;
-	background-color: rgb(227, 125, 5);
+	color: black;
+	background-color: #DEB887;
 }
 
 .form {
@@ -317,3 +370,43 @@ img#mygallery:hover {
 	box-sizing: border-box;
 }
 
+label.logo42 {
+	position: absolute;
+	top: 9%;
+}
+
+label.banane {
+	position: absolute;
+	top: 25%;;
+}
+
+label.beard {
+	position: absolute;
+	top: 42%;
+}
+
+label.lunette {
+	position: absolute;
+	right: 1%;
+	top: 9%
+}
+
+label.moustache {
+	position: absolute;
+	right: 1%;
+	top: 25%;
+}
+
+label.barbe {
+	position: absolute;
+	right: 1%;
+	top: 42%;
+}
+
+@media all and (max-width: 1000px) {
+	label.logo42, label.banane,
+	label.beard, label.lunette,
+	label.moustache, label.barbe {
+		position: relative;
+	}
+}
