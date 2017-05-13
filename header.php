@@ -18,7 +18,7 @@ if ($_SESSION['login'] && $_SESSION['login'] != "")
 else {
 	echo "<ul class='topnav'>
 		<li><a href='index.php'><img src='img/camagru.png'/></a><li>
-		<li style='float:right'><a href='log_form.php'>Connexion</a></li>
+		<li style='float:right'><a href='connexion.php'>Connexion</a></li>
 		<li style='float:right'><a href='create.php'>Creer un compte</a></li>";
 	echo "</ul>";
 }
