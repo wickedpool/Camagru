@@ -1,20 +1,50 @@
 <?php
 
+	if ($_GET[msg]) {echo "<script>alert(\"".htmlentities($_GET[msg])."\");window.location.href = \"create.php\";</script>";}
+
 include_once 'header.php';
+include_once 'db.php';
 
+echo '<h4>Veuillez remplir tous les champs, un mail vous sera envoyé pour activer votre compte </h4>';
 
-if ($_POST['login'] && $_POST['login'] !== "" && $_POST['mdp'] !== "") {
-	if (empty($_POST["email"])) {
-		echo '<h4>Veuillez remplir tous les champs, un mail vous sera envoyé pour activer votre compte </h4>';
-	} else if (empty($_POST["login"])) {
-		echo '<h4>Champ login vide </h4>';
-	} else if (empty($_POST["mdp"])) {
-		echo '<h4>Champ password vide</h4>';
-	} else if (strlen($_POST["mdp"]) < 8) {
-		echo '<h4>Le mot de passe doit contenir au moins 8 caracteres</h4>';
-	} else if ($_POST['mdp'] != $_POST['remdp']) {
-		echo '<h4>Les mots de passe sont differents</h4>';
-	} else {
+if (empty($_POST["email"]) || empty($_POST["login"]) || empty($_POST["mdp"])) {
+		header("location: create.php?msg=Merci de remplir tous les champs.\n");
+} else if (strlen($_POST["mdp"]) < 8) {
+		header("location: create.php?msg=Le mot de passe doit contenir au moins 8 caracteres.\n");
+} else if ($_POST['mdp'] != $_POST['remdp']) {
+		header("location: create.php?msg=Les mots de passe ne sont pas identiques.\n");
+}
+
+try {
+	$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$stmt = $db->prepare('SELECT COUNT(*) FROM membres WHERE login = :login');
+	$stmt->bindParam(':login', $_POST[login], PDO::PARAM_STR);
+	$stmt->execute();
+} catch (PDOException $mess) {
+	echo '<h4>Error: '.$mess->getMessage()'</h4>';
+	exit;
+}
+if ($stmt->fetchColumn()) {
+	header("Location: create.php?msg=Login deja pris.\n");
+	exit;
+}
+$passwd = sha1($_POST[passwd]);
+$hash = md5( rand(0,1000) );
+
+try {
+	$stmt = $db->prepare('INSERT INTO membres (email, login, passwd, hash) VALUES (:email, :login, :passwd, :hash)');
+	$stmt->bindParam(':email', $_POST[email], PDO::PARAM_STR,);
+	$stmt->bindParam(':login', $_POST[login], PDO::PARAM_STR,);
+	$stmt->bindParam(':email', $passwd, PDO::PARAM_STR,);
+	$stmt->bindParam(':email', $hash, PDO::PARAM_STR,);
+	$stmt->execute();
+} catch (PDOException $mess) {
+	echo '<h4>Error: '.$mess->getMessage()'</h4>';
+	exit;
+}
+
+/*else {
 		$login = $_POST['login'];
 		$passwd = $_POST['mdp'];
 		$email = $_POST['email'];
@@ -33,11 +63,12 @@ if ($_POST['login'] && $_POST['login'] !== "" && $_POST['mdp'] !== "") {
 			echo '<h4>L\'email ou le login existe deja! Merci de reessayer !</h4>';
 		}
 		else {
-			echo "<script>window.location.replace(\"create.php\");</script>";
+			//echo "<script>window.location.replace(\"index.php\");</script>";
 			echo "<h4>Votre compte a ete cree, rdv boite mail!</h4>";
 			$passwd = sha1($passwd);
 			$query = mysqli_query($db, "INSERT INTO `membres`(`email`, `login`, `passwd`, `hash`) VALUES ('$email', '$login', '$passwd', '$hash')");
-			$to      = $email;
+ */
+			$to      = $_POST[email];
 			$subject = 'Signup | Verification';
 			$message = '
 
@@ -53,14 +84,14 @@ if ($_POST['login'] && $_POST['login'] !== "" && $_POST['mdp'] !== "") {
 	------------------------
 
 	Please click this link to activate your account:
-	http://localhost:8888/titi/verify.php?email='.$email.'&hash='.$hash.'
+	http://localhost:8080/Camagru/verify.php?email='.$email.'&hash='.$hash.'
 
 	';
 
 			$headers = 'From:wickedpool@camagru.42.fr' . "\r\n";
 			mail($to, $subject, $message, $headers);
-			echo "<h4>Votre compte a ete cree, rdv boite mail!</h4>";
 			$_SESSION['login']=$login;
+			header("Location: index.php?msg=Votre compte a ete cree. Merci de consulter vos mail pour activer votre compte.\n");
 		}
 	}
 }

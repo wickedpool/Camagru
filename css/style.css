@@ -186,7 +186,7 @@ img#myhome:hover {
 }
 
 img#mypics:hover {
-	opacity: 0.5;
+	opacity: 0.8;
 	filter: alpha(opacity=50); /* For IE8 and earlier */
 	box-shadow: 10px 10px 5px black
 }
