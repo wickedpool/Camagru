@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once 'db.php';
 
 if (empty($_POST[login]) || empty($_POST[passwd])) {
@@ -18,6 +18,7 @@ if (empty($_POST[login]) || empty($_POST[passwd])) {
   if ($user = $sth->fetchColumn()) {
       try {
           $passwd = sha1($_POST[passwd]);
+
           $sth = $dbh->prepare('SELECT COUNT(*) FROM membres WHERE passwd = :passwd AND login = :login');
           $sth->bindParam(':login', $_POST[login], PDO::PARAM_STR);
           $sth->bindParam(':passwd', $passwd, PDO::PARAM_STR);
@@ -36,6 +37,7 @@ if (empty($_POST[login]) || empty($_POST[passwd])) {
           }
           if ($sth->fetchColumn()) {
               $_SESSION['login'] = $_POST[login];
+              header("Location: index.php?msg=Content de vous revoir ".$_POST[login]." !\n");
               exit();
           } else {
               header("Location: index.php?msg=Activer votre compte.\n");

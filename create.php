@@ -24,8 +24,9 @@ if ($stmt->fetchColumn()) {
 	header("Location: create_user.php?msg=Login deja pris.\n");
 	exit;
 }
-$passwd = sha1($_POST[passwd]);
+$passwd = sha1($_POST[mdp]);
 $hash = md5( rand(0,1000) );
+$login = $_POST[login];
 
 try {
 	$stmt = $db->prepare('INSERT INTO membres (email, login, passwd, hash) VALUES (:email, :login, :passwd, :hash)');
