@@ -1,52 +1,51 @@
 <?php
 
-include_once 'header.php';
+include_once 'db.php';
 
-if ($_POST['login'] && $_POST['login'] !== "" && $_POST['passwd'] !== "") {
-	$login = $_POST['login'];
-	$passwd = $_POST['passwd'];
-	session_start();
-	//CONNEXION SQL
-	$db = mysqli_connect("localhost", "root", "root", "camagru");
-	if (!$db)
-		echo "fuck";
-	$login = preg_replace("[^A-Za-z0-9]","",$login);
-	$passwd = preg_replace("[^A-Za-z0-9]","",$passwd);
-	//crypt
-	//SQL request
-	$query = mysqli_query($db, "SELECT * FROM membres WHERE login = '$login' LIMIT 1");
-	$user_found = mysqli_fetch_assoc($query);
-	// echo $user_found['login'];
-	if(!$user_found)
-		echo "<h4>L'utilisateur ou le mot de passe n'existe pas!</h4>";
-	else {
-		$passwd = sha1($passwd);
-		// echo "passwd: ".$passwd."<br>";
-		$query2 = mysqli_query($db, "SELECT * FROM membres WHERE login='$login' AND passwd='$passwd' LIMIT 1");
-		$user_found2 = mysqli_fetch_assoc($query2);
-		// print_r($user_found2);
-		if(!$user_found2) {
-			echo "<h4>L'utilisateur ou le mot de passe ne correspond pas</h4>";
-			exit();
-		}
-		else {
-			//CONNEXION
-			$_SESSION['login']=$login;
-			$_SESSION['is_admin']=$user_found2['admin'];
-		}
-	}
-}
-
+if (empty($_POST[login]) || empty($_POST[passwd])) {
+      header("Location: connexion_user.php?msg=Merci de remplir tous les champs.\n");
+      exit();
+  }
+  try {
+      $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+      $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sth = $dbh->prepare('SELECT COUNT(*) FROM membres WHERE login = :login');
+      $sth->bindParam(':login', $_POST[login], PDO::PARAM_STR);
+      $sth->execute();
+  } catch (PDOException $e) {
+      echo 'Error :'.$e->getMessage();
+  }
+  if ($user = $sth->fetchColumn()) {
+      try {
+          $passwd = sha1($_POST[passwd]);
+          $sth = $dbh->prepare('SELECT COUNT(*) FROM membres WHERE passwd = :passwd AND login = :login');
+          $sth->bindParam(':login', $_POST[login], PDO::PARAM_STR);
+          $sth->bindParam(':passwd', $passwd, PDO::PARAM_STR);
+          $sth->execute();
+      } catch (PDOException $e) {
+          echo 'Error :'.$e->getMessage();
+      }
+      if ($sth->fetchColumn()) {
+          try {
+              $sth = $dbh->prepare("SELECT COUNT(*) FROM membres WHERE passwd = :passwd AND login = :login AND active = '1'");
+              $sth->bindParam(':login', $_POST[login], PDO::PARAM_STR);
+              $sth->bindParam(':passwd', $passwd, PDO::PARAM_STR);
+              $sth->execute();
+          } catch (PDOException $e) {
+              echo 'Error :'.$e->getMessage();
+          }
+          if ($sth->fetchColumn()) {
+              $_SESSION['login'] = $_POST[login];
+              exit();
+          } else {
+              header("Location: index.php?msg=Activer votre compte.\n");
+          }
+      } else {
+          header("Location: connexion_user.php?msg=Mauvais mot de passe.\n");
+          exit();
+      }
+  } else {
+      header("Location: connexion_user.php?msg=Le compte n'existe pas.\n");
+      exit();
+  }
 ?>
-
-	<form class='logform' action="connexion.php" method="post">
-		<center>
-		<label class='mytext' for="login">Login</label><br>
-		<input class='mybar' type="text" name="login" placeholder='entrez votre login' /><br/>
-		<label class='mytext' for="passwd">Mot de passe</label><br>
-		<input class='mybar' type="password" name="passwd" placeholder='entrez votre mot de passe' /><br/>
-		<a href='forgot.php'>Mot de passe oublié</a><br/>
-		<input class='mybutton' type="submit" name="connexion" /><br/>
-		</center>
-	</form>
-</html>

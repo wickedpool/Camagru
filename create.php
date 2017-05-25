@@ -3,11 +3,11 @@
 include_once 'db.php';
 
 if (empty($_POST["email"]) || empty($_POST["login"]) || empty($_POST["mdp"])) {
-	header("location: create.php?msg=Merci de remplir tous les champs.\n");
+	header("location: create_user.php?msg=Merci de remplir tous les champs.\n");
 } else if (strlen($_POST["mdp"]) < 8) {
-	header("location: create.php?msg=Le mot de passe doit contenir au moins 8 caracteres.\n");
+	header("location: create_user.php?msg=Le mot de passe doit contenir au moins 8 caracteres.\n");
 } else if ($_POST['mdp'] != $_POST['remdp']) {
-	header("location: create.php?msg=Les mots de passe ne sont pas identiques.\n");
+	header("location: create_user.php?msg=Les mots de passe ne sont pas identiques.\n");
 }
 
 try {
@@ -21,7 +21,7 @@ try {
 	exit;
 }
 if ($stmt->fetchColumn()) {
-	header("Location: create.php?msg=Login deja pris.\n");
+	header("Location: create_user.php?msg=Login deja pris.\n");
 	exit;
 }
 $passwd = sha1($_POST[passwd]);
@@ -55,7 +55,7 @@ $message = '
 	------------------------
 
 	Please click this link to activate your account:
-	http://localhost:8080/Camagru/verify.php?email='.$email.'&hash='.$hash.'
+	http://localhost:8080/Camagru/verify.php?email='.$_POST[email].'&hash='.$hash.'
 
 	';
 

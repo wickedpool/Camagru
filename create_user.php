@@ -1,6 +1,6 @@
 <?php 
 
-if ($_GET[msg]) {echo "<script>alert(\"".htmlentities($_GET[msg])."\");window.location.href = \"create.php\";</script>";}
+if ($_GET[msg]) {echo "<script>alert(\"".htmlentities($_GET[msg])."\");window.location.href = \"create_user.php\";</script>";}
 
 include_once('header.php'); 
 
