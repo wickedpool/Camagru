@@ -16,7 +16,7 @@
       $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $stmt = $db->prepare("INSERT INTO gallery (login, img) VALUES (:login, :file)");
-      $stmt->bindParam(':login', $_POST[login], PDO::PARAM_STR);
+      $stmt->bindParam(':login', $_POST[user], PDO::PARAM_STR);
       $stmt->bindParam(':file', $file, PDO::PARAM_STR);
       $stmt->execute();
   } catch (PDOException $e) {

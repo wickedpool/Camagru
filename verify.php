@@ -23,7 +23,7 @@ if ($stmt->fetchColumn()) {
 		echo "Error : ".$msg->getMessage();
 		exit;
 	}
-	header("Location: index.php?msg=Votre compte est actif");
+	header("Location: index.php?msg=Votre compte est actif.\n");
 } else {
 	header("Location: index.php?msg=error.\n");
 }

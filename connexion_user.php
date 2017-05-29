@@ -12,7 +12,7 @@ include_once('header.php');
 		<input class='mybar' type="text" name="login" placeholder='entrez votre login' /><br/>
 		<label class='mytext' for="passwd">Mot de passe</label><br>
 		<input class='mybar' type="password" name="passwd" placeholder='entrez votre mot de passe' /><br/>
-		<a href='forgot.php'>Mot de passe oublié</a><br/>
+		<a href='forgot_user.php'>Mot de passe oublié</a><br/>
 		<input class='mybutton' type="submit" name="connexion" /><br/>
 		</center>
 	</form>

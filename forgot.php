@@ -1,45 +1,48 @@
 <?php
 
-include_once 'header.php';
+include_once 'db.php';
 
-if ($_POST['email'] && $_POST['email'] != "")
-{
-	$email = $_POST('email');
-	$newpass = rand(5, 400000);
-	$db = mysqli_connect("localhost", "root", "root", "camagru");
-	$query = mysqli_query($db, "SELECT * FROM membres WHERE email='$email'");
-	$is_found = mysqli_fetch_assoc($query);
-	if ($is_found) {
-		echo "<h4>Votre mot de passe a ete change</h4>";
-		echo "<script>window.location.replace(\"forgot.php\");</script>";
-		$hashit = sha1($newpass);
-		$query1 = mysqli_query($db, "UPDATE membres SET passwd='$hashit' WHERE email='$email'");
-		$to = $email;
-		$subjet = 'New Password | Camagru';
+if (empty($_POST['email'])) {
+	header("location: forgot_user.php?msg=Merci de remplir le champ email.\n");
+}
+
+try {
+	$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$stmt = $db->prepare('SELECT * FROM membres WHERE email = :email');
+	$stmt->bindParam(':email', $_POST[email], PDO::PARAM_STR);
+	$stmt->execute();
+} catch (PDOException $msg) {
+	echo 'Error :'.$msg->getMessage();
+}
+if ($stmt->fetchColumn()) {
+	try {
+		$newpass = rand(5, 4000000);
+		$stmt = $db->prepare('UPDATE membres SET passwd = :passwd WHERE email = :email');
+		$stmt->bindParam(':passwd', $newpass, PDO::PARAM_STR);
+		$stmt->bindParam('email', $_POST[email], PDO::PARAM_STR);
+		$stmt->execute();
+		$to = $_POST[email];
+		$subject = 'New Password | Camagru';
 		$message = '
 
-	Voici votre nouveau mot de passe :
+	Cliquez ce lien pour chager votre mot de passe :
 
 	---------------------
-	New password = '.$newpass.'
+		http://localhost:8080/Camagru/newpass_user.php?email='.$_POST[email].'&hash='.$newpass.'
 	---------------------
 
 	Enjoy!';
 		$headers = 'From:wickedpool@camagru.42.fr' . "\r\n";
 		mail($to, $subject, $message, $headers);
-	} else {
-		echo "<h4>L'email ne correspond a aucun compte</h4>";
+
+	} catch (PDOException $msg) {
+		echo "Error : ".$msg->getMessage();	
+		exit;
 	}
+	header("Location: index.php?msg=Regardez vos mail pour changer votre mot de passe !.\n");
+} else {
+	header("Location: index.php?msg=Error.\n");
 }
 
 ?>
-
-	<form class='logform' action="forgot.php" method="post">
-		<center>
-		<h3>Mot de passe oublié?<h3>
-		<label class='mytext' for="email">Votre adresse email</label><br>
-		<input class='mybar' type="email" name="email" placeholder='entrez votre adresse mail' /><br/>
-		<input class='mybutton' type="submit" name="connexion" /><br/>
-		</center>
-	</form>
-</html>
