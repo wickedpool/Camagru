@@ -35,7 +35,7 @@ $dbh = null;
 	<title>Camagru - Setup</title>
   </head>
   <body>
-	<form action="../" class="inline">
+	<form action="index.php" class="inline">
 		<button autofocus="autofocus" tabindex="1">Index</button>
 	</form>
   </body>
