@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!$_SESSION[login]) {
-	header ("Location: index.php?msg=Vous deve vous connecter pour acceder a cette page.\n");
-	exit;
-}
 if (empty($_POST[comm]) || empty($_GET[id_image])) {
 	header("Location: gallery.php?page=$_GET[page]");
 	exit;
@@ -26,5 +22,18 @@ try {
 	exit;
 }
 
+$mail = $stmt->fetchColumn();
+$to = $mail;
+$subject = 'Camagru | Commentaire';
+$message = "
+
+Un nouveau commentaire a ete poste sur votre photo par: $_SESSION[login]
+
+Commentaire : $_POST[comm]
+
+ ";
+
+$headers = 'From:wickedpool@camagru.42.fr' . "\r\n";
+mail($to, $subject, $message, $headers);
 
 ?>

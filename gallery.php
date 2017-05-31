@@ -72,12 +72,36 @@ foreach ($sql as $key => $value) {
 	if ($sql) {
 		echo "<div class='comment'>";
 		foreach ($sql as $key => $var) {
-			echo "by <i>$value[login]</i><br/>$value[comment]";
+			echo "by <i>$value[login]</i><br/> $value[comment] <hr>";
 		}
 		echo '</div>';
 	}
 	echo '</div>';
 }
+echo "<center><ul class='pages'>";
+try {
+	$stmt = $db->prepare("SELECT COUNT(*) from gallery");
+	$stmt->execute();
+} catch (PDOException $msg) {
+	echo 'Error: '.$msg->getMessage();
+	exit;
+}
+$nb = ($stmt->fetchColumn() - 1) / 10 + 1;
+$previous = $_GET[page] - 1;
+if ($previous > 0) {
+	echo "<li><a href='?page=$prev'>← ← </a></li>";
+}
+$i = 1;
+while ($i <= $nb) {
+	echo "<li><a href='?page=$i>$i</a></li>";
+	$i++;
+}
+$next = $_GET[page] + 1;
+if ($next < $nb) {
+	echo "<li><a href='?page=$next'> →→ </a></li>";
+}
+	echo "</ul></center>";
+
 ?>
 
 	</body>

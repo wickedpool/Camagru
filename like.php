@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!$SESSION[login]) {
-	header("Location: index.php?msg=Vous devez vous connecter pour acceder a cette page.\n");
-	exit;
-}
 include_once 'db.php';
 if (empty($_GET[id_image])) {
 	header("Location: gallery.php?Merci de remplir tous les champs.\n");
@@ -36,6 +32,7 @@ if ($stmt->fetchColumn()) {
 		$stmt->bindParam(':log', $_SESSION[login], PDO::PARAM_STR);
 		$stmt->bindParam(':id_img', $_GET[id_image], PDO::PARAM_INT);
 		$stmt->execute();
+		header("Location: gallery.php?page=$_GET[page]");
 	} catch (PDOException $msg) {
 		echo 'Error: '.$msg->getMessage();
 		exit;
