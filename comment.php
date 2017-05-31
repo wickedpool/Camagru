@@ -4,7 +4,7 @@ if (!$_SESSION[login]) {
 	header ("Location: index.php?msg=Vous deve vous connecter pour acceder a cette page.\n");
 	exit;
 }
-if (empty($_POST[comm]) || empty($_GET[id_image]])) {
+if (empty($_POST[comm]) || empty($_GET[id_image])) {
 	header("Location: gallery.php?page=$_GET[page]");
 	exit;
 }
@@ -25,4 +25,6 @@ try {
 	echo 'Erreur: '.$msg->getMessage();
 	exit;
 }
+
+
 ?>

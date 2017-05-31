@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SESSION[login]) {
 	if (!$_GET[page]) {
 		header('Location: gallery.php?page=1');
@@ -11,11 +12,12 @@ if ($_SESSION[login]) {
 
 include_once 'db.php';
 
+$nb = ($_GET[page] - 1) * 10;
 try {
 	$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);	
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = $db->prepare('SELECT * FROM gallery LIMIT 10 OFFSET :nb');
-	$stmt->bindParam(':nb', ($_GET[page] - 1) * 10, PDO::PARAM_INT);
+	$stmt->bindParam(':nb', $nb, PDO::PARAM_INT);
 	$stmt->execute();
 } catch (PDOException $msg) {
 	echo 'Error: '.$msg->getMessage();
@@ -23,7 +25,7 @@ try {
 }
 
 $sql = $stmt->fetchAll();
-if (!$result) {
+if (!$sql) {
 	if ($_GET[page] > 1) {
 		$preview = $_GET[page] - 1;
 		header("Location: gallery.php?page=$prev");
@@ -33,7 +35,7 @@ if (!$result) {
 	}
 }
 
-foreach ($result as $hey => $value) {
+foreach ($sql as $key => $value) {
 	echo "<div class='boximg'>";
 	try {
 		$stmt = $db->prepare("SELECT COUNT(*) FROM jaime WHERE id_image = :id_img");
@@ -54,7 +56,7 @@ foreach ($result as $hey => $value) {
 			<img src='images/Like.png' width='30' height='30'>
 		</a>
 		<form class='com' action='comment.php?id_image=$value[id]&page=$_GET[page]' method='post'><br/>
-			<input class='comform' style='width:70%' type='text' placeholder='Entrez votre commentaire' name='comm' required>'
+			<input class='comform' style='width:100%' type='text' placeholder='Entrez votre commentaire' name='comm' required>
 			<button type='submit' class='button'>Valider</button>
 		</form>"; 
 
@@ -69,7 +71,7 @@ foreach ($result as $hey => $value) {
 	$sql = $stmt->fetchAll();
 	if ($sql) {
 		echo "<div class='comment'>";
-		foreach ($result as $key => $var) {
+		foreach ($sql as $key => $var) {
 			echo "by <i>$value[login]</i><br/>$value[comment]";
 		}
 		echo '</div>';
