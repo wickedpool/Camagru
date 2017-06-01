@@ -224,7 +224,7 @@ img#mygallery:hover {
 	}
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.wrapper img#mypics {
 		width: 31%;
 		position: relative;
@@ -234,7 +234,7 @@ img#mygallery:hover {
 	}
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.wrapper img#mygallery {
 		width: 31%;
 		position: relative;
@@ -245,7 +245,7 @@ img#mygallery:hover {
 	}
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.wrapper img#myhome {
 		width: 100%;
 	}
