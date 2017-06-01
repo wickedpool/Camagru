@@ -51,11 +51,25 @@ foreach ($sql as $key => $value) {
 	}
 	echo "<img src='$value[img]' style='width:400px'><br/>
 		Posté par : <i>$value[login]<br/></i>
-		J'aime : $jaime
-		<a href='like.php?id_image=$value[id]&page=$_GET[page]' style='float:right;margin-top:-20px'>
-			<img src='images/Like.png' width='30' height='30'>
-		</a>
-		<form class='com' action='comment.php?id_image=$value[id]&page=$_GET[page]' method='post'><br/>
+		J'aime : $jaime";
+		try {
+			$stmt = $db->prepare('SELECT COUNT(*) FROM jaime WHERE login = :log AND id_image = :id_img');
+			$stmt->bindParam(':log', $_SESSION[login], PDO::PARAM_STR);
+			$stmt->bindParam(':id_img', $value[id], PDO::PARAM_INT);
+			$stmt->execute();
+		} catch (PDOException $msg) {
+			echo 'Error: '.$msg->getMessage();
+			exit;
+		} if ($stmt->fetchColumn()) {	
+			echo "<a href='like.php?id_image=$value[id]&page=$_GET[page]' style='float:right;margin-top:-20px'>
+					<img src='images/dislike.png' width='30' height='30' style='margin-top:10px'>
+				</a>";
+		} else {
+			echo "<a href='like.php?id_image=$value[id]&page=$_GET[page]' style='float:right;margin-top:-20px'>
+					<img src='images/Like.png' width='30' height='30' style='margin-top:10px'>
+				</a>";
+		}
+	echo "<form class='com' action='comment.php?id_image=$value[id]&page=$_GET[page]' method='post'><br/>
 			<input class='comform' style='width:100%' type='text' placeholder='Entrez votre commentaire' name='comm' required>
 			<button type='submit' class='button'>Valider</button>
 		</form>"; 

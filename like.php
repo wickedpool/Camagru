@@ -22,6 +22,7 @@ if ($stmt->fetchColumn()) {
 		$stmt->bindParam(':log', $_SESSION[login], PDO::PARAM_STR);
 		$stmt->bindParam(':id_img', $_GET[id_image], PDO::PARAM_INT);
 		$stmt->execute();
+		header("Location: gallery.php?page=$_GET[page]");
 	} catch (PDOException $msg) {
 		echo 'Error: '.$msg->getMessage();
 		exit;

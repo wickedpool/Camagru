@@ -415,8 +415,9 @@ label.barbe {
 
 .boximg {
 	width: 400px;
-	border: 10px solid wheat;
+	border: 10px solid #DEB887;
 	margin-top: 2%;
 	margin-left: 3%;
 	float: left;
+	background-color: #DEB887;
 }
