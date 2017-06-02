@@ -34,7 +34,7 @@ if (!$sql) {
 		echo '<h4>La galerie est vide, soyez le premier a poster une photo !</h4>';
 	}
 }
-
+echo "<div>";
 foreach ($sql as $key => $value) {
 	echo "<div class='boximg'>";
 	try {
@@ -46,7 +46,16 @@ foreach ($sql as $key => $value) {
 		exit;
 	}
 	$jaime = $stmt->fetchColumn();
-	if ($value[login] == $_SESSION[login]) {
+	try {
+		$stmt = $db->prepare("SELECT admin from membres WHERE login = :log");
+		$stmt->bindParam(':log', $_SESSION[login], PDO::PARAM_STR);
+		$stmt->execute();
+	} catch (PDOException $msg) {
+		echo 'Error: '.$msg->getMessage();
+		exit;
+	}
+	$admin = $stmt->fetchColumn();
+	if ($value[login] == $_SESSION[login] || $admin == 1) {
 		echo "<a href='remove.php?img=$value[id]&page=$_GET[page]'><img src='images/trash.png' width='30' style='position:absolute'></a>";
 	}
 	echo "<img src='$value[img]' style='width:400px'><br/>
@@ -71,7 +80,7 @@ foreach ($sql as $key => $value) {
 		}
 	echo "<form class='com' action='comment.php?id_image=$value[id]&page=$_GET[page]' method='post'><br/>
 			<input class='comform' style='width:100%' type='text' placeholder='Entrez votre commentaire' name='comm' required>
-			<button type='submit' class='button'>Valider</button>
+			<input type='submit' class='button' name='Valider'/>
 		</form>"; 
 
 	try {
@@ -86,13 +95,15 @@ foreach ($sql as $key => $value) {
 	if ($sql) {
 		echo "<div class='comment'>";
 		foreach ($sql as $key => $var) {
-			echo "by <i>$value[login]</i><br/> $value[comment] <hr>";
+			echo "by <i>$var[login]</i> : $var[comment] <hr>";
 		}
 		echo '</div>';
 	}
 	echo '</div>';
 }
-echo "<center><ul class='pages'>";
+echo "</div>";
+echo "<center><div class='galfoot'";
+echo "<ul class='pages'>";
 try {
 	$stmt = $db->prepare("SELECT COUNT(*) from gallery");
 	$stmt->execute();
@@ -105,16 +116,15 @@ $previous = $_GET[page] - 1;
 if ($previous > 0) {
 	echo "<li><a href='?page=$prev'>← ← </a></li>";
 }
-$i = 1;
-while ($i <= $nb) {
-	echo "<li><a href='?page=$i>$i</a></li>";
-	$i++;
+for ($i = 1; $i <= $nb; ++$i) {
+	echo "<li><a href='?page=$i'>$i</a></li>";
 }
 $next = $_GET[page] + 1;
 if ($next < $nb) {
 	echo "<li><a href='?page=$next'> →→ </a></li>";
 }
-	echo "</ul></center>";
+	echo "</ul>";
+echo "</div></center>";
 
 ?>
 

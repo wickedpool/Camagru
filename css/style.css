@@ -420,4 +420,15 @@ label.barbe {
 	margin-left: 3%;
 	float: left;
 	background-color: #DEB887;
+	height: 550px;
+}
+
+.comment {
+	overflow-y: scroll;
+	white-space: nowrap;
+	height: 66px;
+}
+
+.galfoot {
+
 }
