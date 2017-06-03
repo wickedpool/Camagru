@@ -24,7 +24,7 @@ if ($stmt->fetchColumn()) {
 	header("Location: create_user.php?msg=Login deja pris.\n");
 	exit;
 }
-$passwd = sha1($_POST[mdp]);
+$passwd = hash('whirlpool', $_POST['mdp']);
 $hash = md5( rand(0,1000) );
 $login = $_POST[login];
 
@@ -52,7 +52,6 @@ $message = '
 
 	------------------------
 	Username: '.$login.'
-	Password: '.$passwd.'
 	------------------------
 
 	Please click this link to activate your account:

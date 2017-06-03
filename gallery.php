@@ -34,6 +34,29 @@ if (!$sql) {
 		echo '<h4>La galerie est vide, soyez le premier a poster une photo !</h4>';
 	}
 }
+echo "<center><ul class='pagination1'>";
+try {
+	$stmt = $db->prepare("SELECT COUNT(*) from gallery");
+	$stmt->execute();
+} catch (PDOException $msg) {
+	echo 'Error: '.$msg->getMessage();
+	exit;
+}
+$nb = ($stmt->fetchColumn() - 1) / 10 + 1;
+$previous = $_GET[page] - 1;
+if ($previous > 0) {
+	echo "<li><a href='?page=$previous'>&laquo;</a></li>";
+}
+for ($i = 1; $i <= $nb; ++$i) {
+	echo "<li><a  href='?page=$i'>$i</a></li>";
+}
+$next = $_GET[page] + 1;
+if ($next < $nb) {
+	echo "<li><a href='?page=$next'>&raquo;</a></li>";
+}
+echo "</ul></center>";
+
+echo '<br/>';
 echo "<div>";
 foreach ($sql as $key => $value) {
 	echo "<div class='boximg'>";
@@ -102,29 +125,6 @@ foreach ($sql as $key => $value) {
 	echo '</div>';
 }
 echo "</div>";
-echo "<center><div class='galfoot'";
-echo "<ul class='pages'>";
-try {
-	$stmt = $db->prepare("SELECT COUNT(*) from gallery");
-	$stmt->execute();
-} catch (PDOException $msg) {
-	echo 'Error: '.$msg->getMessage();
-	exit;
-}
-$nb = ($stmt->fetchColumn() - 1) / 10 + 1;
-$previous = $_GET[page] - 1;
-if ($previous > 0) {
-	echo "<li><a href='?page=$prev'>← ← </a></li>";
-}
-for ($i = 1; $i <= $nb; ++$i) {
-	echo "<li><a href='?page=$i'>$i</a></li>";
-}
-$next = $_GET[page] + 1;
-if ($next < $nb) {
-	echo "<li><a href='?page=$next'> →→ </a></li>";
-}
-	echo "</ul>";
-echo "</div></center>";
 
 ?>
 

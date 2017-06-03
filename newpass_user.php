@@ -23,7 +23,7 @@ try {
 	echo "Error : ".$msg->getMessage();
 	exit;
 }
-$passwd = sha1($_POST[mdp]);
+$passwd = hash('whirlpool', $_POST[mdp]);
 if ($stmt->fetchColumn()) {
 	try {
 		$stmt = $db->prepare("UPDATE membres SET passwd = :passwd WHERE email = :email");

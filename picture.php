@@ -23,29 +23,29 @@ if ($_SESSION[login]) {
   </div>
   </article>
 	<form id="img_filter">
-	<label for="pinkie_pie" class="logo42">
-	  <input type="radio" name="img_filter" value="images/filters/42.png" id="pinkie_pie" onchange="myimage('pinkie_pie')">
+	<label for="logo42" class="logo42">
+	  <input type="radio" name="img_filter" value="images/filters/42.png" id="logo42" onchange="myimage('logo42')">
 	  <img class="img" src="images/filters/42.png" height="128" width="128">
 	</label>
-	<label for="fireman" class="banane">
-	  <input type="radio" name="img_filter" value="images/filters/banane.png" id="fireman" onchange="myimage('banane')">
+	<label for="banane" class="banane">
+	  <input type="radio" name="img_filter" value="images/filters/banane.png" id="banane" onchange="myimage('banane')">
 	  <img class="img" src="images/filters/banane.png" height="128" width="128">
 	</label>
-	<label for="risitas" class="beard">
-	  <input type="radio" name="img_filter" value="images/filters/beard_PNG6249-170x167.png" id="risitas" onchange="myimage('beard')">
+	<label for="beard" class="beard">
+	  <input type="radio" name="img_filter" value="images/filters/beard_PNG6249-170x167.png" id="beard" onchange="myimage('beard')">
 	  <img class="img" src="images/filters/beard_PNG6249-170x167.png" height="128" width="128">
 	</label>
-	<label for="saltbae" class="lunette">
-	  <input type="radio" name="img_filter" value="images/filters/lunette.png" id="saltbae" onchange="myimage('lunette')">
+	<label for="lunette" class="lunette">
+	  <input type="radio" name="img_filter" value="images/filters/lunette.png" id="lunette" onchange="myimage('lunette')">
 	  <img class="img" src="images/filters/lunette.png" height="128" width="128">
 	</label>
 	<br/>
-	<label for="trump" class="moustache">
-	  <input type="radio" name="img_filter" value="images/filters/moustache.png" id="trump" onchange="myimage('moustache')">
+	<label for="moustache" class="moustache">
+	  <input type="radio" name="img_filter" value="images/filters/moustache.png" id="moustache" onchange="myimage('moustache')">
 	  <img class="img" src="images/filters/moustache.png" height="128" width="128">
 	</label>
-	<label for="panama" class="barbe">
-	  <input type="radio" name="img_filter" value="images/filters/lilbarbe.png" id="panama" onchange="myimage('barbe')">
+	<label for="barbe" class="barbe">
+	  <input type="radio" name="img_filter" value="images/filters/lilbarbe.png" id="barbe" onchange="myimage('barbe')">
 	  <img class="img" src="images/filters/lilbarbe.png" height="128" width="128">
 	</label>
       </form>

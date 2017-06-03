@@ -114,6 +114,6 @@ function getClickPosition(e) {
         var rect = document.getElementById('canvasvideo').getBoundingClientRect();
         PosX = e.clientX - rect.left - (width / 2);
         PosY = e.clientY - rect.top - (width / 2);
-        show_img(current);
+        myimage(current);
     }
 }

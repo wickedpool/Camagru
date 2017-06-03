@@ -17,7 +17,7 @@ if (empty($_POST[login]) || empty($_POST[passwd])) {
   }
   if ($user = $stmt->fetchColumn()) {
       try {
-          $passwd = sha1($_POST[passwd]);
+          $passwd = hash('whirlpool', $_POST[passwd]);
 
           $stmt = $db->prepare('SELECT COUNT(*) FROM membres WHERE passwd = :passwd AND login = :login');
           $stmt->bindParam(':login', $_POST[login], PDO::PARAM_STR);
