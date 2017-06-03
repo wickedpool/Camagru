@@ -432,3 +432,29 @@ label.barbe {
 .galfoot {
 
 }
+
+/* ADMINISTRATION */
+
+ul.menu_h li { 
+display : inline;
+padding : 0 0.5em; /* Pour espacer les boutons entre eux */
+    font-size: 2em;
+}
+ul.menu_h {
+list-style-type : none; /* Car sinon les puces se placent n'importe où */
+}
+
+a.hey:link, a.hey:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 100px;
+}
+
+a.hey:hover, a.hey:active {
+    background-color: red;
+}
+
