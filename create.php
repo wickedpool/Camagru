@@ -3,12 +3,15 @@
 include_once 'db.php';
 include_once 'escape.php';
 
-if (empty($_POST["email"]) || empty($_POST["login"]) || empty($_POST["mdp"])) {
+if (empty($_POST[email]) || empty($_POST[login]) || empty($_POST[mdp])) {
 	header("location: create_user.php?msg=Merci de remplir tous les champs.\n");
-} else if (strlen($_POST["mdp"]) < 8) {
+	exit;
+} else if (strlen($_POST[mdp]) < 8) {
 	header("location: create_user.php?msg=Le mot de passe doit contenir au moins 8 caracteres.\n");
-} else if ($_POST['mdp'] != $_POST['remdp']) {
+	exit;
+} else if ($_POST[mdp] != $_POST[remdp]) {
 	header("location: create_user.php?msg=Les mots de passe ne sont pas identiques.\n");
+	exit;
 }
 
 $log = Escape::bdd($_POST[login]);

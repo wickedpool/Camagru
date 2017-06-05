@@ -113,7 +113,7 @@ try {
 	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
 	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
 	$stmt->execute();
-	$img = 'image/1496503774.png';
+	$img = 'image/1496622797.png';
 	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
 	$stmt->bindParam(':login', $g, PDO::PARAM_STR);
 	$stmt->bindParam(':img', $img, PDO::PARAM_STR);

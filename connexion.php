@@ -48,6 +48,10 @@ if (empty($_POST[login]) || empty($_POST[passwd])) {
 			header("Location: connexion_user.php?msg=Mauvais mot de passe.\n");
 			exit();
 		}
+		header("Location: connexion_user.php?msg=Essaie encore.\n");
+		exit();
 	}
+	header("Location: connexion_user.php?msg=Essaie encore.\n");
+	exit();
 }
 ?>

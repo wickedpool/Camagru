@@ -60,5 +60,6 @@ if ($_SESSION[login]) {
     </form>
   </div>
   </aside>
+<a class='mylink' href = "index.php">Retour a la page d'accueil</a>
 	</body>
 </html>
