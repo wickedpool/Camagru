@@ -6,34 +6,98 @@ html {
 h1 {
 	color: black;
 	text-align: center;
+	font-size: 7em
+}
+
+.easy {
+	margin-right:auto;
+	margin-left:auto;
+	display:block;
+	margin-top:-6%;
+}
+
+h1.hometext {
+	color:#3c538b;
+}
+
+@media screen and (min-width: 1400px) {
+	h1.hometext {
+		font-size:5em
+	}
+}
+
+.ban {
+	margin: 3%;
+}
+
+.ban img {
+	width:100%;	
+}
+
+a.hey1:link, a.hey1:visited {
+    color: black;
+    padding: 28px 145px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+	border: 1px solid #3c538b;
+}
+
+a.hey1:hover, a.hey1:active {
+    background-color: #3c538b;
+	color:white;
+}
+
+@media screen and (max-width: 1200px) {
+	a.hey1:link {
+		margin-top: 2%;
+		padding: 20px 60px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+  .easy {
+    width: 100%;
+    height: auto;
+  }
+	h1.hometext {
+		font-size:5em;
+	}
+	a.hey1 {
+		padding: 10px 20px;
+	}
 }
 
 /* TEXT FOR LOGIN FORM */
 
 h4 {
-	border: 20px solid #333;
-	background-color: #333;
-	color: white;
+	border: 1px solid #3c538b;
+	background-color: white;
+	color: #3c538b;
 	font-size: 2em;
 	text-align: center;
+	padding: 30px
 }
 
 /* FORM */
 
 form.logform {
-	background: #DEB887;
-	border: 10px dashed wheat;
+	background: white;
+	border: 10px solid #3c538b;
 	width: 50%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2%;
+	opacity: 0.9;
+    color: black;
 }
 
 input.mybar {
 	width: 60%;
 	height: 3%;
 	margin: 2%;
+	border: 1px solid #3c538b;
 }
 
 label.mytext {
@@ -41,18 +105,20 @@ label.mytext {
 }
 
 input.mybutton {
-	background-color: wheat;
-	color: #fff;
+	background-color: white;
+	color: black;
 	padding: 14px 20px;
 	margin: 8px 0;
 	border: none;
 	cursor: pointer;
 	width: 100%;
+	font-size: 1em;
+	border: 1px solid #3c538b;
 }
 
 input.mybutton:hover {
 	color: black;
-	background-color: #DEB887;
+	background-color: #3c538b;
 }
 
 center {
@@ -62,14 +128,15 @@ center {
 a.mylink {
 	position: absolute;
 	bottom: 10%;
-	border: 10px solid #333;
-	background: #333;
-	color: white;
+	border: 1px solid #3c538b;
+	padding:15px;
+	background: white;
+	color: black;
 }
 
 a.mylink:hover {
-	background-color: black;
-	border: 10px solid black;
+	background-color: #3c538b;
+	color: white;
 }
 
 /*  NAV  */
@@ -84,7 +151,7 @@ ul.topnav {
 
 ul.topnav img {
 	width:5.5em;
-	border-right: 1px solid #4fc4dd;
+	border-right: 1px solid #3c538b;
 }
 
 ul.topnav li {
@@ -100,8 +167,8 @@ ul.topnav li a {
 }
 
 ul.topnav .zop a:hover:not(.active) {
-	background-color: #02aeeB;
-	border: 1px solid #02aeeB;
+	background-color: #3c538b;
+	border: 1px solid #3c538b;
 	color:white;
 }
 
@@ -333,8 +400,9 @@ img#mygallery:hover {
 }
 
 .videobox {
-	background: #DEB887;
-	border: 10px dashed wheat;
+	background: white;
+	border: 1px solid #3c538b;
+	padding: 10px;
 	width: 640px;
 	display: block;
 	margin-left: auto;
@@ -354,18 +422,18 @@ img#mygallery:hover {
 }
 
 .button {
-	background-color: wheat;
-	color: #fff;
+	border: 1px solid #3c538b;
+	background-color: white;
+	color: black;
 	padding: 14px 20px;
 	margin: 8px 0;
-	border: none;
 	cursor: pointer;
 	width: 100%;
 }
 
 .button:hover {
-	color: black;
-	background-color: #DEB887;
+	color: white;
+	background-color: #3c538b;
 }
 
 .form {
@@ -420,11 +488,12 @@ label.barbe {
 
 .boximg {
 	width: 400px;
-	border: 10px solid #DEB887;
+	border: 1px solid #3c538b;
+	padding: 8px;
 	margin-top: 2%;
 	margin-left: 3%;
 	float: left;
-	background-color: #DEB887;
+	background-color: white;
 	height: 550px;
 }
 

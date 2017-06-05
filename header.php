@@ -34,7 +34,7 @@ else {
 	echo "<ul class='topnav'>
 		<li><a href='index.php'><img src='img/clogo.png'/></a><li>
 		<li class='zop' style='float:right;margin-top:1.5%;margin-right:6px'><a href='connexion_user.php'>Connexion</a></li>
-		<li class='zop' style='float:right;margin-top:1.5%;border:1px solid #4fc4dd'><a href='create_user.php'>Creer un compte</a></li>";
+		<li class='zop' style='float:right;margin-top:1.5%;border:1px solid #3c538b'><a href='create_user.php'>Creer un compte</a></li>";
 	echo "</ul>";
 }
 ?>
