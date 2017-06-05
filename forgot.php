@@ -1,16 +1,18 @@
 <?php
 
 include_once 'db.php';
+include_once 'escape.php';
 
 if (empty($_POST['email'])) {
 	header("location: forgot_user.php?msg=Merci de remplir le champ email.\n");
 }
 
 try {
+	$email = Escape::bdd($_POST[email]);
 	$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = $db->prepare('SELECT * FROM membres WHERE email = :email');
-	$stmt->bindParam(':email', $_POST[email], PDO::PARAM_STR);
+	$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 	$stmt->execute();
 } catch (PDOException $msg) {
 	echo 'Error :'.$msg->getMessage();
@@ -20,16 +22,16 @@ if ($stmt->fetchColumn()) {
 		$newpass = rand(5, 4000000);
 		$stmt = $db->prepare('UPDATE membres SET passwd = :passwd WHERE email = :email');
 		$stmt->bindParam(':passwd', $newpass, PDO::PARAM_STR);
-		$stmt->bindParam('email', $_POST[email], PDO::PARAM_STR);
+		$stmt->bindParam('email', $email, PDO::PARAM_STR);
 		$stmt->execute();
-		$to = $_POST[email];
+		$to = $email;
 		$subject = 'New Password | Camagru';
 		$message = '
 
 	Cliquez ce lien pour chager votre mot de passe :
 
 	---------------------
-		http://localhost:8080/Camagru/newpass_user.php?email='.$_POST[email].'&hash='.$newpass.'
+		http://localhost:8080/Camagru/newpass_user.php?email='.$email.'&hash='.$newpass.'
 	---------------------
 
 	Enjoy!';

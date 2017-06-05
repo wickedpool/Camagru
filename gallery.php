@@ -11,6 +11,7 @@ if ($_SESSION[login]) {
 }
 
 include_once 'db.php';
+include_once 'escape.php';
 
 $nb = ($_GET[page] - 1) * 10;
 try {

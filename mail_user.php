@@ -21,9 +21,10 @@ if ($admin == 1) {
 	header('Location: index.php?msg=Vous n\'avez pas acces a cette page');
 }
 
-include_once('db.php');
-
+include_once('escape.php');
 try {
+	$email = Escape::bdd($_POST[email]);
+	$nemail = Escape::bdd($_POST[newmail]);
 	$stmt = $db->prepare('UPDATE membres SET email = :newmail WHERE email = :email');
 	$stmt->bindParam(':newmail', $_POST[newmail], PDO::PARAM_STR);
 	$stmt->bindParam(':email', $_POST[email], PDO::PARAM_STR);
