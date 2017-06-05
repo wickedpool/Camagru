@@ -25,16 +25,16 @@ if ($_SESSION['login'] && $_SESSION['login'] != "")
 {
 	echo "<ul class='topnav'>";
 	if ($admin == 1)
-		echo "<li style='float:right'><a href=\"administration.php\">administration</a></li>";
-	echo "  <li><a href='index.php'><img src='img/camagru.png'/></a><li>
-		<li style='float:right'><a href=\"deconnexion.php\">déconnexion</a></li>";
+		echo "<li class='zop' style='float:right;margin-top:1.5%;margin-right:6px'><a href=\"administration.php\">administration</a></li>";
+	echo "  <li><a href='index.php'><img src='img/clogo.png'/></a><li>
+		<li class='zop' style='float:right;margin-top:1.5%;margin-right:6px'><a href=\"deconnexion.php\">déconnexion</a></li>";
 	echo "</ul>";
 }
 else {
 	echo "<ul class='topnav'>
-		<li><a href='index.php'><img src='img/camagru.png'/></a><li>
-		<li style='float:right'><a href='connexion_user.php'>Connexion</a></li>
-		<li style='float:right'><a href='create_user.php'>Creer un compte</a></li>";
+		<li><a href='index.php'><img src='img/clogo.png'/></a><li>
+		<li class='zop' style='float:right;margin-top:1.5%;margin-right:6px'><a href='connexion_user.php'>Connexion</a></li>
+		<li class='zop' style='float:right;margin-top:1.5%;border:1px solid #4fc4dd'><a href='create_user.php'>Creer un compte</a></li>";
 	echo "</ul>";
 }
 ?>

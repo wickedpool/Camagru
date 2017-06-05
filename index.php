@@ -2,6 +2,9 @@
 	if ($_GET[msg]) {echo "<script>alert(\"".htmlentities($_GET[msg])."\");window.location.href = \"index.php\";</script>";}
 include_once 'header.php'
 ?>
+
+		<h1>Montez, capturez et partagez sur</h1>
+		<img src="img/clogo.png" /><h2>AMAGRU</h2>
 		<div class="wrapper">
 			<div class="content">
 				<a class="home" href="gallery.php">
@@ -14,35 +17,6 @@ include_once 'header.php'
 					<img src="http://4.bp.blogspot.com/-Q11j9gR4x-s/VcTqbwTwiiI/AAAAAAAAAgo/oUwuhscRpvY/s1600/iconemaison2-01.png" id="mygallery" title="gallerie">
 				</a>
 			</div>
-			<div class="ban">
-				<div class="container">
-					 <div class="column column-one column-offset-2">
-						<p>Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.
-						</p>
-					</div>
- 					 <div class="column column-two column-inset-1">
-						<p>
-						Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.
-						</p>
-					</div>
- 	 				 <div class="column column-three column-offset-1">
-						<p>
-Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.
-						</p>
-					</div>
-   					<div class="column column-four column-inset-2">
-						<p>Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.
-					</p>
-					</div>
-   					<div class="column column-five">
-						<p>Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.
-						</p>
-					</div>
-				</div>
-			</div>
 		</div>
-		<ul class="footer">
-			<li>F O O T E R</li>
-		</ul>
 	</body>
 </html>

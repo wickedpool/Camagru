@@ -31,28 +31,124 @@ try {
 		login VARCHAR(255) NOT NULL,
 		id_image VARCHAR(255) NOT NULL)");
 	echo "Table 'jaime' created successfully.<br><br><br>";
-	$db->exec('INSERT INTO membres (id, email, login, passwd, hash, admin, active) VALUES
-		(1, giraudthomas38@gmail.com, thomas, d3068f59aa0148fbe5b930dfb4f31db1311f4f0c2b652e3d0e6907f2fd28b140f2cc9ca802cede3bd5608fd1296328e4a7cc5314849ed0c9d09dcc3e80f557fd, ba2fd310dcaa8781a9a652a31baf3c68, 1, 1),
-		(2, thgiraud@student.42.fr, titi, cc8c74dc072e25db099cb60bc8683657736bc95f65f6a0164d52aae721c9367bdf06dfa8844107a815ab3e4c21c08bda71aaa7382a781696ece90d3e0ecae460, d14220ee66aeec73c49038385428ec4c, 0, 1),
-		(3, glouyot@student.42.fr, glouyot, d3068f59aa0148fbe5b930dfb4f31db1311f4f0c2b652e3d0e6907f2fd28b140f2cc9ca802cede3bd5608fd1296328e4a7cc5314849ed0c9d09dcc3e80f557fd, 98f13708210194c475687be6106a3b84, 0, 1');
-	echo "Table membres filled";
-	$db->exec('INSERT INTO gallery (id, login, img) VALUES
-		(1, thomas, image/1496503261.png),
-		(2, glouyot, image/1496503771.png),
-		(3, titi, image/1496503390.png),
-		(4, thomas, image/1496503284.png),
-		(5, thomas, image/1496503297.png),
-		(6, glouyot, image/1496503774.png),
-		(7, titi, image/1496503392.png),
-		(8, thomas, image/1496503302.png),
-		(9, glouyot, image/1496503774.png),
-		(10, glouyot, image/1496503776.png),
-		(11, glouyot, image/1496503261.png),
-		(12, thomas, image/1496503306.png),
-		(13, thomas, image/1496503314.png),
-		(14, titi, image/1496503397.png),
-		(15, titi, image/1496503400.png),');
-	echo "Table gallery filled";
+	$mail = 'giraudthomas38@gmail.com';
+	$name = 'thomas';
+	$pass = 'd3068f59aa0148fbe5b930dfb4f31db1311f4f0c2b652e3d0e6907f2fd28b140f2cc9ca802cede3bd5608fd1296328e4a7cc5314849ed0c9d09dcc3e80f557fd';
+	$hash = 'ba2fd310dcaa8781a9a652a31baf3c68';
+	$one = 1;
+	$zero = 0;
+	$stmt = $db->prepare('INSERT INTO membres (email, login, passwd, hash, admin, active) VALUES (:email, :login, :passwd, :hash, :admin, :active)');
+	$stmt->bindParam(':email', $mail, PDO::PARAM_STR);
+	$stmt->bindParam(':login', $name, PDO::PARAM_STR);
+	$stmt->bindParam(':passwd', $pass, PDO::PARAM_STR);
+	$stmt->bindParam(':hash', $hash, PDO::PARAM_STR);
+	$stmt->bindParam(':admin', $one, PDO::PARAM_STR);
+	$stmt->bindParam(':active', $one, PDO::PARAM_STR);
+	$stmt->execute();
+	$stmt = $db->prepare('INSERT INTO membres (email, login, passwd, hash, admin, active) VALUES (:email, :login, :passwd, :hash, :admin, :active)');
+	$mail = 'thgiraud@student.42.fr';
+	$name = 'titi';
+	$pass = 'cc8c74dc072e25db099cb60bc8683657736bc95f65f6a0164d52aae721c9367bdf06dfa8844107a815ab3e4c21c08bda71aaa7382a781696ece90d3e0ecae460';
+	$hash = 'd14220ee66aeec73c49038385428ec4c';
+	$stmt->bindParam(':email', $mail, PDO::PARAM_STR);
+	$stmt->bindParam(':login', $name, PDO::PARAM_STR);
+	$stmt->bindParam(':passwd', $pass, PDO::PARAM_STR);
+	$stmt->bindParam(':hash', $hash, PDO::PARAM_STR);
+	$stmt->bindParam(':admin', $zero, PDO::PARAM_STR);
+	$stmt->bindParam(':active', $one, PDO::PARAM_STR);
+	$stmt->execute();
+	$stmt = $db->prepare('INSERT INTO membres (email, login, passwd, hash, admin, active) VALUES (:email, :login, :passwd, :hash, :admin, :active)');
+	$mail = 'glouyot@student.42.fr';
+	$name = 'glouyot';
+	$pass = 'd3068f59aa0148fbe5b930dfb4f31db1311f4f0c2b652e3d0e6907f2fd28b140f2cc9ca802cede3bd5608fd1296328e4a7cc5314849ed0c9d09dcc3e80f557fd';
+	$hash = '210194c475687be6106a3b84';
+	$stmt->bindParam(':email', $mail, PDO::PARAM_STR);
+	$stmt->bindParam(':login', $name, PDO::PARAM_STR);
+	$stmt->bindParam(':passwd', $pass, PDO::PARAM_STR);
+	$stmt->bindParam(':hash', $hash, PDO::PARAM_STR);
+	$stmt->bindParam(':admin', $zero, PDO::PARAM_STR);
+	$stmt->bindParam(':active', $one, PDO::PARAM_STR);
+	$stmt->execute();
+	echo "Table membres filled.<br>";
+	$t = 'thomas';
+	$ti = 'titi';
+	$g = 'glouyot';
+	$img = 'image/1496503261.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503771.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $g, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503390.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $ti, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503284.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503297.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503774.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $g, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503392.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $ti, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503302.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503774.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $g, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503776.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $g, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503314.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $g, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503261.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503306.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $t, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503397.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $ti, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	$img = 'image/1496503400.png';
+	$stmt = $db->prepare('INSERT INTO gallery (login, img) VALUES (:login, :img)');
+	$stmt->bindParam(':login', $ti, PDO::PARAM_STR);
+	$stmt->bindParam(':img', $img, PDO::PARAM_STR);
+	$stmt->execute();
+	echo "Table gallery filled.<br>";
 } catch (PDOException $e) {
 	echo $sql.'<br>'.$e->getMessage();
 }
