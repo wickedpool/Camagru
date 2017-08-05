@@ -1,4 +1,5 @@
 <?php
+
 	if ($_GET[msg]) {echo "<script>alert(\"".htmlentities($_GET[msg])."\");window.location.href = \"index.php\";</script>";}
 include_once 'header.php'
 ?>
